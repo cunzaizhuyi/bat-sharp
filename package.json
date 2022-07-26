@@ -1,0 +1,61 @@
+{
+  "name": "bat-sharp",
+  "type": "module",
+  "version": "1.0.1",
+  "packageManager": "pnpm@7.2.1",
+  "description": "",
+  "author": "cunzaizhuyi",
+  "license": "MIT",
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "lint": "eslint .",
+    "prepublishOnly": "nr build",
+    "pub": "npm publish",
+    "start": "esno src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.25.2",
+    "@antfu/ni": "^0.16.3",
+    "@antfu/utils": "^0.5.2",
+    "@types/node": "^18.0.3",
+    "bumpp": "^8.2.1",
+    "eslint": "^8.19.0",
+    "esno": "^0.16.3",
+    "pnpm": "^7.5.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.7.4",
+    "unbuild": "^0.7.4",
+    "vite": "^2.9.14",
+    "vitest": "^0.18.0"
+  },
+  "dependencies": {
+    "fast-glob": "^3.2.11",
+    "sharp": "^0.30.7"
+  }
+}
