@@ -23,7 +23,7 @@
 ### Usage
 
 ```javascript
-const { batSharp } = require('@tencent/bat-sharp');
+const { batSharp } = require('bat-sharp');
 
 batSharp({
   inputArr: ['./images/*.png'],
