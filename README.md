@@ -20,6 +20,12 @@
 
 所以有了本工具。
 
+
+### Install
+```
+npm i bat-sharp -D
+```
+
 ### Usage
 
 ```javascript
