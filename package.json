@@ -6,7 +6,7 @@
   "description": "",
   "author": "cunzaizhuyi",
   "license": "MIT",
-  "keywords": [],
+  "keywords": ["image process", "image compress", "image format convert"],
   "sideEffects": false,
   "exports": {
     ".": {

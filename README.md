@@ -1,24 +1,14 @@
 ## bat-sharp
 
-图片批处理工具。 
+[中文](https://github.com/cunzaizhuyi/bat-sharp/README_cn.md)
 
-主要用于图片压缩 和 格式转换
+bat-sharp is a image batch processing tool.
 
-基于fast-glob 和 sharp.js实现
+Features:
+* image compress
+* image format convert
 
-
-### Why
-
-在有少量图片时，可以使用https://tinypng.com/  进行图片压缩；
-但当有大量图片时，比如上百张图片，tinypng会限制你，
-虽然它说一次可以传20张图，但当你频繁操作时，它可能一次只能帮你压缩几张而已；
-你只有降低操作频率，等几分钟，下一次才可能真的帮你压缩20张。
-
-总之，如果有上百张图片时，用tinypng完整压缩完图片可能需要几分钟。
-
-而且如果你想使用webp/avif这种体积更小的图片格式的话，它无能为力；
-
-所以有了本工具。
+It base on fast-glob.js and sharp.js
 
 
 ### Install
@@ -33,10 +23,34 @@ const { batSharp } = require('bat-sharp');
 
 batSharp({
   inputArr: ['./images/*.png'],
-  format: 'webp', // png jpeg webp avif等
+  format: 'webp', // png jpeg webp avif and so on
   outputPath: './images2/',
-  outputConfig: { // 参考 https://sharp.pixelplumbing.com/api-output#png
+  outputConfig: { // docs: https://sharp.pixelplumbing.com/api-output#png
     quality: 60,
   },
 })
 ```
+
+### Why
+
+you can use https://tinypng.com/ to image compress when you
+has a few images;
+
+but tinypng will limit you if you has hundreds of images;
+tinypng says that it can compress 20 images once a time,
+however it can't do this actually when you upload images continually.
+it only compress less than 20 images at a time.
+
+you need wait some minutes for next upload operation;
+
+
+In a word，compressing hundreds of images will waste you amounts of time;
+
+In addition, if you want convert your png or jpg images to
+other format, this site can't help you;
+
+so, bat-sharp was born!
+
+It's very tiny and fast!
+
+Try it!
