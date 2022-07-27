@@ -1,7 +1,7 @@
 {
   "name": "bat-sharp",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "packageManager": "pnpm@7.2.1",
   "description": "",
   "author": "cunzaizhuyi",
@@ -38,7 +38,7 @@
     "dev": "unbuild --stub",
     "lint": "eslint .",
     "prepublishOnly": "nr build",
-    "pub": "npm publish",
+    "pub": "bumpp && npm publish",
     "start": "esno src/index.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
