@@ -1,6 +1,6 @@
 ## bat-sharp
 
-[中文](https://github.com/cunzaizhuyi/bat-sharp/README_cn.md)
+[中文](https://github.com/cunzaizhuyi/bat-sharp/blob/master/README_cn.md)
 
 bat-sharp is a image batch processing tool.
 
