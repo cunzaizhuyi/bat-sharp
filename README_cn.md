@@ -40,3 +40,9 @@ batSharp({
   },
 })
 ```
+
+### related article
+*  [几百张图片快速批处理工具bat-sharp.js介绍](https://segmentfault.com/a/1190000042232783)
+
+### related video
+[几百张图片几秒处理完毕！写了一个图片批处理工具](https://www.bilibili.com/video/BV1ea411U7Vu/)
