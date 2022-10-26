@@ -29,7 +29,8 @@ const getRelativePathName = (path: string) => {
     p.shift()
 
   // remove the given path like `image`
-  p.shift()
+  if (p.length >= 2)
+    p.shift()
 
   // remove extension
   const f = p[p.length - 1].split('.')

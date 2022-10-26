@@ -43,7 +43,7 @@
     "lint": "eslint .",
     "prepublishOnly": "nr build",
     "pub": "bumpp && npm publish",
-    "start": "esno src/index.ts",
+    "start": "esno test/index.test.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
