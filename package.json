@@ -6,6 +6,10 @@
   "description": "",
   "author": "cunzaizhuyi",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cunzaizhuyi/bat-sharp.git"
+  },
   "keywords": [
     "image process",
     "image compress",
@@ -22,10 +26,6 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cunzaizhuyi/bat-sharp.git"
-  },
   "typesVersions": {
     "*": {
       "*": [
@@ -47,6 +47,10 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "fast-glob": "^3.2.11",
+    "sharp": "^0.30.7"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
     "@antfu/ni": "^0.16.3",
@@ -61,9 +65,5 @@
     "unbuild": "^0.7.4",
     "vite": "^2.9.14",
     "vitest": "^0.18.0"
-  },
-  "dependencies": {
-    "fast-glob": "^3.2.11",
-    "sharp": "^0.30.7"
   }
 }

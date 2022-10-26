@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-// @ts-expect-error
+// @ts-expect-error type-declaration
 import sharp from 'sharp'
 import fg from 'fast-glob'
 
@@ -9,10 +9,40 @@ interface IOptions {
   format: string
   outputPath: string
   outputConfig?: Object
+
+  /**
+   * @default true
+   */
+  maintainRelativePath?: boolean
 }
 
 const getFileName = (path: string) => {
   return path.replace(/(.*\/)*([^.]+).*/gi, '$2')
+}
+
+const getRelativePathName = (path: string) => {
+  // split by `/`
+  const p = path.split('/')
+
+  // remove the first dot
+  if (p[0] === '.')
+    p.shift()
+
+  // remove the given path like `image`
+  p.shift()
+
+  // remove extension
+  const f = p[p.length - 1].split('.')
+  if (f.length >= 2)
+    f.pop()
+
+  // filePath/fileName
+  p[p.length - 1] = f.join('.')
+  const pathName = p.join('/')
+
+  // filePath without fileName
+  p.pop()
+  return [pathName, p.join('/')]
 }
 
 export const batSharp = async (options: IOptions) => {
@@ -21,6 +51,7 @@ export const batSharp = async (options: IOptions) => {
     format = 'png',
     outputPath,
     outputConfig = {},
+    maintainRelativePath = true,
   } = options || {}
 
   if (!outputPath || !inputArr?.length || !format)
@@ -36,23 +67,29 @@ export const batSharp = async (options: IOptions) => {
 
   let isAllSucc = true
   for (const filePath of entries) {
-    const targetPath = path.join(outputPath, `${getFileName(filePath)}.${format}`)
+    let targetPathName = ''
+
+    if (maintainRelativePath) {
+    // get filePath and filePath without fileName
+      const [pathName, pathWithoutName] = getRelativePathName(filePath)
+      targetPathName = path.join(outputPath, `${pathName}.${format}`)
+      const targetPath = path.join(outputPath, pathWithoutName)
+
+      // ensure file path exists
+      if (!fs.existsSync(path.normalize(targetPath)))
+        fs.mkdirSync(targetPath)
+    }
+    else {
+      targetPathName = path.join(outputPath, `${getFileName(filePath)}.${format}`)
+    }
+
+    // compress and output
     sharp(filePath)[format](outputConfig)
-      .toFile(`${targetPath}`, (err: string) => {
+      .toFile(`${targetPathName}`, (err: string) => {
         if (err)
           isAllSucc = false
       })
   }
   if (isAllSucc)
-    console.log('处理完毕')
+    console.log(`Task finished! Please check the path ${outputPath}.`)
 }
-
-// 测试demo
-// batSharp({
-//   inputArr: ['./images/*.png'],
-//   format: 'webp',
-//   outputPath: './images2/',
-//   outputConfig: {
-//     quality: 60,
-//   },
-// })
