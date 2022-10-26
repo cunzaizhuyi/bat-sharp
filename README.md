@@ -28,6 +28,7 @@ batSharp({
   outputConfig: { // docs: https://sharp.pixelplumbing.com/api-output#png
     quality: 60,
   },
+  maintainRelativePath: true,  // <-- this value is true by default
 })
 ```
 
