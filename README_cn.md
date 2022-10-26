@@ -38,6 +38,7 @@ batSharp({
   outputConfig: { // 参考 https://sharp.pixelplumbing.com/api-output#png
     quality: 60,
   },
+  maintainRelativePath: true,  // <-- this value is true by default 当你的输入图片集合有嵌套路径时，输出目录也维持原来的目录层次。
 })
 ```
 
