@@ -1,6 +1,6 @@
 import { batSharp } from '../src/index'
 
-const inputArr = ['./images/**/*.png']
+const inputArr = ['./**/*.png']
 const outputPath = './images_compressed'
 
 await batSharp({
