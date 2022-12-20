@@ -1,6 +1,5 @@
 import path from 'path'
 import fs from 'fs'
-// @ts-expect-error type-declaration
 import sharp from 'sharp'
 import fg from 'fast-glob'
 
@@ -66,12 +65,11 @@ export const batSharp = async (options: IOptions) => {
   if (!isExist)
     fs.mkdirSync(outputPath)
 
-  let isAllSucc = true
-  for (const filePath of entries) {
+  const res = await Promise.allSettled(entries.map(async (filePath) => {
     let targetPathName = ''
 
     if (maintainRelativePath) {
-    // get filePath and filePath without fileName
+      // get filePath and filePath without fileName
       const [pathName, pathWithoutName] = getRelativePathName(filePath)
       targetPathName = path.join(outputPath, `${pathName}.${format}`)
       const targetPath = path.join(outputPath, pathWithoutName)
@@ -85,12 +83,14 @@ export const batSharp = async (options: IOptions) => {
     }
 
     // compress and output
-    sharp(filePath)[format](outputConfig)
-      .toFile(`${targetPathName}`, (err: string) => {
-        if (err)
-          isAllSucc = false
-      })
-  }
-  if (isAllSucc)
+    await sharp(filePath, outputConfig)
+      .toFile(targetPathName)
+  }))
+
+  const errors = res.filter(it => it.status === 'rejected')
+
+  if (errors.length === 0)
     console.log(`Task finished! Please check the path ${outputPath}.`)
+  else
+    console.error(errors)
 }
