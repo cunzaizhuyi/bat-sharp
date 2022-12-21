@@ -3,9 +3,11 @@ import fs from 'fs'
 import sharp from 'sharp'
 import fg from 'fast-glob'
 
+type Format = 'jpeg' | 'jp2' | 'png' | 'webp' | 'gif' | 'avif' | 'heif' | 'tiff'
+
 interface IOptions {
   inputArr: string[]
-  format: string
+  format: Format
   outputPath: string
   outputConfig?: Object
 
@@ -83,14 +85,13 @@ export const batSharp = async (options: IOptions) => {
     }
 
     // compress and output
-    await sharp(filePath, outputConfig)
+    await sharp(filePath)[format](outputConfig)
       .toFile(targetPathName)
   }))
 
   const errors = res.filter(it => it.status === 'rejected')
 
-  if (errors.length === 0)
-    console.log(`Task finished! Please check the path ${outputPath}.`)
-  else
-    console.error(errors)
+  console.log(`${res.length - errors.length} tasks finished! Please check the path ${outputPath}.`)
+  if (errors.length)
+    console.error(errors.map(e => (e as any).reason))
 }
